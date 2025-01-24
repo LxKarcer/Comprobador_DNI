@@ -1,3 +1,4 @@
+from cli_colors import Colors
 class AsignmentList:
     def __init__(self):
         self.tabla = [
@@ -34,12 +35,18 @@ class AsignmentList:
             return self.tabla[posicion]
         except IndexError:
             return "Fuera de rango"
+        
+    def getModulo(self):
+        return len(self.getTabla())
     
     def isLetraPermitida(self, letra):
-        if letra in self.tabla:
-            return True
-        else:
-            return False
+        return letra in self.getTabla()
+    
+    def calcularLetra(self, dni):
+        try:
+            return self.tabla[int(dni) % self.getModulo()] 
+        except ValueError:
+            return "DNI no valido"
 
     
 
@@ -81,6 +88,8 @@ if __name__ == "__main__":
         "76857238R",
         "66714505S",
         "66499420A",
+        "39498277D", 
+        "16503950E",
     ]
 
     ### Añado casos test FAIL ALEATORIOS ###
